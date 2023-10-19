@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   def create
     @prototype = Prototype.find(params[:prototype_id])
     @comment = @prototype.comments.build(comment_params.merge(user: current_user))
+    @comment.user = current_user
     if @comment.save
       redirect_to prototype_path(@prototype)
     else
